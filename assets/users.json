@@ -1,0 +1,32 @@
+[
+  {
+    "userId": 1,
+    "username": "cynthia",
+    "password": "1234"
+  },
+  {
+    "userId": 2,
+    "username": "icywest",
+    "password": "1234"
+  },
+  {
+    "userId": 3,
+    "username": "cc",
+    "password": "123213"
+  },
+  {
+    "userId": 4,
+    "username": "Patrick",
+    "password": "12"
+  },
+  {
+    "userId": 5,
+    "username": "psolis18",
+    "password": "patrick18"
+  },
+  {
+    "userId": 6,
+    "username": "patrick1",
+    "password": "1234"
+  }
+]

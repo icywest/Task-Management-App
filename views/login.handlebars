@@ -1,0 +1,15 @@
+{{#if userId}}
+  <a href="/home/{{userId}}">Home</a> | 
+  <a href="/logout">Logout</a>
+{{else}}
+  <h1>Login / Create Profile</h1>
+  <form action="/user/login" method="POST">
+    <input type="text" name="username" placeholder="Username" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit" name="action" value="login">Login</button>
+    <button type="submit" name="action" value="create">Create Account</button>
+  </form>
+  {{#if message}}
+    <p style="color: red;">{{message}}</p>
+  {{/if}}
+{{/if}}

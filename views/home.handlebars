@@ -1,0 +1,33 @@
+<h1>Welcome, {{username}}!</h1>
+<a href="/">Logout</a>
+
+<form method="GET">
+  <label>Sort by:</label>
+  <select name="sort">
+    <option value="priority">Priority</option>
+    <option value="dueDate">Due Date</option>
+  </select>
+  <button type="submit">Apply</button>
+</form>
+
+{{#each tasks}}
+  <div class="task {{status}}">
+    <h3>{{name}}</h3>
+    <p>{{description}}</p>
+    <p><strong>Estado:</strong> {{status}}</p>
+    <p><strong>Fecha Límite:</strong> {{dueDate}}</p>
+    <p><strong>Usuario ID:</strong> {{userId}}</p>
+    <p>{{taskId}}</p>
+    <a href='/add-task/{{userId}}/{{taskId}}'>Edit Task</a>
+
+    <!-- Delete Form with Confirmation -->
+    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit" style="color: red; cursor: pointer;">Delete Task</button>
+    </form>
+  </div>
+{{/each}}
+
+<a href='/add-task/{{userId}}'>Add New Task</a>
+
+<script src="/js/confirmation.js"></script>
