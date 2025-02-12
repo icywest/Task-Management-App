@@ -1,14 +1,24 @@
 import {Router} from 'express';
-import { addTask, getAllTasks, updateTask, deleteTask, getTaskById } from '../models/task.js';
+import { addTask, getAllTasks, updateTask, deleteTask, getTaskById, getTasksByUserId, filterTasks } from '../models/task.js';
 
 
 const router = Router();
 
 router.get('/tasks/:userId', (req, res) => {
   const { userId } = req.params;
-  const tasks = getAllTasks();
+  const { status, dueDate, search } = req.query; 
+
+  let tasks;
+
+  if (status || dueDate || search) {
+    tasks = filterTasks(userId, { status, dueDate, search });
+  } else {
+    tasks = getTasksByUserId(userId);
+  }
+
   res.json(tasks);
 });
+
 
 router.post('/tasks/:userId', (req, res) => {
   const { userId } = req.params;
@@ -46,6 +56,7 @@ router.delete('/tasks/:userId/:taskId', (req, res) => {
   deleteTask(taskId);
   res.redirect(`/home/${userId}`);
 });
+
 
 
 export default router;

@@ -5,7 +5,7 @@ import { dirname } from 'path';
 import userRoutes from './routes/usersRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
 import { findUserByUsername, addUser } from './models/user.js';  // Adjusted for your structure
-import { getAllTasks } from './models/task.js';
+import { getAllTasks, sortTasks } from './models/task.js';
 import Handlebars from "handlebars";
 
 function updateReqMethod(req, res, next) {
@@ -20,6 +20,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const PORT = process.env.PORT || 1000;
+const HOST = process.env.HOST || '127.0.0.1';
+const fetchUrl = `http://${HOST}:${PORT}`;
 const server = express();
 
 // Setup the template engine
@@ -57,10 +59,29 @@ server.use('/user', userRoutes);
 server.use('/tasks', taskRoutes);
 
 
-server.get('/home/:userId',(req, res) => {
+server.get('/home/:userId', async (req, res) => {
   const userId = parseFloat(req.params.userId); 
-  const tasks = getAllTasks().filter(task => task.userId === userId); 
-  res.render('home', { tasks, userId });
+  const { sort, status, dueDate, search } = req.query;
+
+  try {
+    const queryParams = new URLSearchParams();
+    if (status) queryParams.append("status", status);
+    if (dueDate) queryParams.append("dueDate", dueDate);
+    if (search) queryParams.append("search", search);
+
+    const response = await fetch(`${fetchUrl}/tasks/tasks/${userId}?${queryParams.toString()}`);
+    const tasks = await response.json();
+
+    if (sort) {
+      sortTasks(tasks, sort);
+      return res.render('home', { tasks, userId });
+    }
+
+    res.render('home', { tasks, userId });
+  }
+  catch (error) {
+    console.error(error);
+  }
 });
 
 server.get('/add-task/:userId/:taskId?', (req, res) => {
@@ -125,18 +146,6 @@ server.post('/login', (req, res) => {
 // View Routes (Home, Logout, etc.)
 server.get('/', (req, res) => {
   res.render('login', { title: 'Login / Create Profile' });
-});
-
-server.post('/add-task/:id', checkAuth, (req, res) => {
-  const { title, description, category } = req.body;
-  const { id: userId } = req.params;
-
-  if (!title || !description || !category) {
-    return res.render('addTask', { title: 'Add Task', userId, message: 'Please provide all task details.' });
-  }
-
-  addTask(userId, title, description, category);
-  res.redirect(`/home/${userId}`);
 });
 
 // 404 Error

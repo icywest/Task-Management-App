@@ -32,6 +32,10 @@ export const getTaskById = (taskId) => {
   return getAllTasks().find(task => task.taskId === parseInt(taskId));
 };
 
+export const getTasksByUserId = (userId) => {
+  return getAllTasks().filter(task => task.userId === parseInt(userId));
+};
+
 export const updateTask = (taskId, updatedFields) => {
   const tasks = getAllTasks();
   const index = tasks.findIndex(task => task.taskId === parseInt(taskId));
@@ -48,4 +52,46 @@ export const deleteTask = (taskId) => {
   let tasks = getAllTasks();
   tasks = tasks.filter(task => task.taskId !== parseInt(taskId));
   fs.writeFileSync(tasksFilePath, JSON.stringify(tasks, null, 2));
+};
+
+
+//the logic of the sort compares two pointers to determine the order
+export const sortTasks = (tasks, sortBy) => {
+  return tasks.sort((a, b) => {
+    if (a[sortBy] < b[sortBy]) { 
+      return -1;
+    }
+    if (a[sortBy] > b[sortBy]) {
+      return 1;
+    }
+    return 0;
+  });
+}
+
+export const filterTasks = (userId, { status, dueDate, search }) => {
+  let tasks = getTasksByUserId(userId);
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in the format "YYYY-MM-DD" 
+  // console.log(new Date().toISOString().split("T"));
+
+  if (status) {
+    tasks = tasks.filter(task => task.status === status);
+  }
+
+  if (dueDate) {
+    if (dueDate === "pastDue") {
+      tasks = tasks.filter(task => task.dueDate < today && task.status !== "Completed");
+    } else if (dueDate === "lateCompletion") {
+      tasks = tasks.filter(task => task.dueDate < today && task.status === "Completed");
+    }
+  }
+
+  if (search) {
+    const lowerSearch = search.toLowerCase();
+    tasks = tasks.filter(task => {
+      return (task.title && task.title.toLowerCase().includes(lowerSearch)) ||
+             (task.description && task.description.toLowerCase().includes(lowerSearch));
+    });
+  }
+
+  return tasks;
 };

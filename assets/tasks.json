@@ -6,17 +6,57 @@
     "userId": 5,
     "category": "School",
     "priority": "High",
-    "status": "Pending",
+    "status": "Completed",
     "dueDate": "2025-02-09"
   },
   {
     "taskId": 2,
     "title": "Week 2 Discussion",
-    "description": "aaa",
+    "description": "si",
     "userId": 6,
     "category": "Personal",
     "priority": "Medium",
     "status": "Pending",
     "dueDate": "2025-02-03"
+  },
+  {
+    "taskId": 3,
+    "title": "Week 2 Discussion",
+    "description": "ghghggh",
+    "userId": 5,
+    "category": "Work",
+    "priority": "High",
+    "status": "Pending",
+    "dueDate": "2025-02-08"
+  },
+  {
+    "taskId": 4,
+    "title": "Week 1 Discussion",
+    "description": "week 1 discussion",
+    "userId": 5,
+    "category": "School",
+    "priority": "Medium",
+    "status": "Canceled",
+    "dueDate": "2025-02-04"
+  },
+  {
+    "taskId": 5,
+    "title": "W1 Discussion",
+    "description": "w1 ",
+    "userId": 5,
+    "category": "School",
+    "priority": "Low",
+    "status": "Completed",
+    "dueDate": "2025-01-26"
+  },
+  {
+    "taskId": 6,
+    "title": "W2 Discussion",
+    "description": "wIWIWIWI",
+    "userId": 5,
+    "category": "Other",
+    "priority": "Low",
+    "status": "Completed",
+    "dueDate": "2025-03-05"
   }
 ]

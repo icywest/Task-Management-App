@@ -4,29 +4,34 @@
 <form method="GET">
   <label>Sort by:</label>
   <select name="sort">
+    <option value="">All</option>
     <option value="priority">Priority</option>
     <option value="dueDate">Due Date</option>
   </select>
+
+  <label>Filter by Status:</label>
+  <select name="status">
+    <option value="">All</option>
+    <option value="Pending">Pending</option>
+    <option value="Completed">Completed</option>
+    <option value="Cancelled">Cancelled</option>
+  </select>
+
+  <label>Filter by Due Date:</label>
+  <select name="dueDate">
+    <option value="">All</option>
+    <option value="pastDue">Past Due</option>
+    <option value="lateCompletion">Late Completion</option>
+  </select>
+
+  <label>Search (Title or Description):</label>
+  <input type="text" name="search" value="{{search}}">
+
   <button type="submit">Apply</button>
+  <button type="button" onclick="window.location='/home/{{userId}}'">Reset Filters</button>
 </form>
 
-{{#each tasks}}
-  <div class="task {{status}}">
-    <h3>{{name}}</h3>
-    <p>{{description}}</p>
-    <p><strong>Estado:</strong> {{status}}</p>
-    <p><strong>Fecha Límite:</strong> {{dueDate}}</p>
-    <p><strong>Usuario ID:</strong> {{userId}}</p>
-    <p>{{taskId}}</p>
-    <a href='/add-task/{{userId}}/{{taskId}}'>Edit Task</a>
-
-    <!-- Delete Form with Confirmation -->
-    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
-      <input type="hidden" name="_method" value="DELETE">
-      <button type="submit" style="color: red; cursor: pointer;">Delete Task</button>
-    </form>
-  </div>
-{{/each}}
+{{> tasksTable}}
 
 <a href='/add-task/{{userId}}'>Add New Task</a>
 
