@@ -1,5 +1,4 @@
-<h1>Welcome, {{username}}!</h1>
-<a href="/">Logout</a>
+<h1>Welcome, {{user.username}}!</h1>
 
 <form method="GET">
   <label>Sort by:</label>
@@ -33,6 +32,12 @@
 
 {{> tasksTable}}
 
-<a href='/add-task/{{userId}}'>Add New Task</a>
+<footer>
+  <a href='/add-task/{{userId}}'>Add New Task</a>
+  <form action="/user/logout" method="POST">
+    <button type="submit">Logout</button>
+  </form>
+</footer>
+
 
 <script src="/js/confirmation.js"></script>

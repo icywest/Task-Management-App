@@ -11,8 +11,14 @@ export const getAllTasks = () => {
   }
 };
 
-export const addTask = (title, description, userId, category, priority, dueDate, status) => {
+export const addTask = (title, description, userId, category, priority, dueDate, status, completionDate = null) => {
   const tasks = getAllTasks();
+
+  // Validate task based on status and due date pointing to the current date
+  if (status === 'Completed' && !completionDate) {
+    return { error: 'A task with status "Completed" requires a completion date.' };
+  }
+
   const newTask = {
     taskId: tasks.length + 1,
     title,
@@ -21,12 +27,17 @@ export const addTask = (title, description, userId, category, priority, dueDate,
     category,
     priority,
     status,
-    dueDate: dueDate || null
+    dueDate: dueDate || null,
+    completionDate: completionDate || null 
   };
+
   tasks.push(newTask);
   fs.writeFileSync(tasksFilePath, JSON.stringify(tasks, null, 2));
   return newTask;
 };
+
+
+
 
 export const getTaskById = (taskId) => {
   return getAllTasks().find(task => task.taskId === parseInt(taskId));

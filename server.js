@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import userRoutes from './routes/usersRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
-import { findUserByUsername, addUser } from './models/user.js';  // Adjusted for your structure
+import { findUserByUsername, addUser, checkSession } from './models/user.js';
 import { getAllTasks, sortTasks } from './models/task.js';
 import Handlebars from "handlebars";
 
@@ -39,16 +39,18 @@ Handlebars.registerHelper('eq', function (a, b) {
   return a === b;
 });
 
-// Middleware to check authentication (via URL params)
+// Middleware to check authentication
 const checkAuth = (req, res, next) => {
-  const { userId } = req.params;
-  const user = findUserByUsername(userId); // Find user by ID
+  const user = checkSession();
+
   if (!user) {
-    return res.redirect('/'); // Redirect if user does not exist
+    return res.redirect('/');
   }
-  else{
-    res.redirect('/home/:userId');
-  }
+
+  req.user = user;
+
+  console.log(user);
+
   next();
 };
 
@@ -59,9 +61,11 @@ server.use('/user', userRoutes);
 server.use('/tasks', taskRoutes);
 
 
-server.get('/home/:userId', async (req, res) => {
+server.get('/home/:userId', checkAuth,  async (req, res) => {
   const userId = parseFloat(req.params.userId); 
   const { sort, status, dueDate, search } = req.query;
+
+  const user = req.user;
 
   try {
     const queryParams = new URLSearchParams();
@@ -74,10 +78,10 @@ server.get('/home/:userId', async (req, res) => {
 
     if (sort) {
       sortTasks(tasks, sort);
-      return res.render('home', { tasks, userId });
+      return res.render('home', { tasks, userId, user });
     }
 
-    res.render('home', { tasks, userId });
+    res.render('home', { tasks, userId, user });
   }
   catch (error) {
     console.error(error);
@@ -98,49 +102,6 @@ server.get('/add-task/:userId/:taskId?', (req, res) => {
   }
 
   res.render('taskForm', { userId });
-});
-
-
-
-// User Routes (Inside routes/usersRoutes.js)
-server.post('/login', (req, res) => {
-  const { username, password, action } = req.body;
-
-  if (action === '/home/:userId') {
-    const user = findUserByUsername(username);
-    if (!user) {
-      return res.render('login', {
-        title: 'Login / Create Profile',
-        message: 'User does not exist. Please create an account.',
-        alertType: 'error',
-      });
-    }
-
-    if (user.password !== password) {
-      return res.render('login', {
-        title: 'Login / Create Profile',
-        message: 'Incorrect password! Please try again.',
-        alertType: 'error',
-      });
-    }
-
-    // Redirect to home with userId as URL parameter
-    res.redirect(`/home/:userId`);
-
-  } else if (action === 'create') {
-    const existingUser = findUserByUsername(username);
-    if (existingUser) {
-      return res.render('login', {
-        title: 'Login / Create Profile',
-        message: 'User already exists! Try a different username.',
-        alertType: 'error',
-      });
-    }
-
-    // Create a new user and redirect to home with the new userId
-    const userId = addUser(username, password);
-    res.redirect(`/home/${userId}`);
-  }
 });
 
 // View Routes (Home, Logout, etc.)

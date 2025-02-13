@@ -28,5 +28,15 @@
     "userId": 6,
     "username": "patrick1",
     "password": "1234"
+  },
+  {
+    "userId": 7,
+    "username": "cynvane",
+    "password": "12345"
+  },
+  {
+    "userId": 8,
+    "username": "Test User",
+    "password": "1234"
   }
 ]

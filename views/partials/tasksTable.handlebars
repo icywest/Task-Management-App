@@ -20,10 +20,21 @@
       <td>{{this.status}}</td>
       <td>
             <a href='/add-task/{{userId}}/{{taskId}}'>Edit Task</a>
-    <!-- Delete Form with Confirmation -->
     <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
       <input type="hidden" name="_method" value="DELETE">
       <button type="submit" style="color: red; cursor: pointer;">Delete Task</button>
+    </form>
+
+    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" style="display:inline;" onsubmit="return confirmComplete();">
+      <input type="hidden" name="_method" value="PUT">
+      <input type="hidden" name="status" value="Completed">
+      <button type="submit">Complete</button>
+    </form>
+
+    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" style="display:inline;" onsubmit="return confirmCancel();">
+      <input type="hidden" name="_method" value="PUT">
+      <input type="hidden" name="status" value="Cancelled">
+      <button type="submit">Cancel</button>
     </form>
       </td>
     </tr>

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const usersFilePath = path.join('assets', 'users.json');
+const userSession = path.join('assets', 'session.json');
 
 const loadUsers = () => {
   try {
@@ -14,6 +15,26 @@ const loadUsers = () => {
 const saveUsers = (users) => {
   fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
 };
+
+
+export const storeSessions = (user) => {
+  fs.writeFileSync(userSession, JSON.stringify(user, null, 2));
+}
+
+export const checkSession = () => {
+  const user = JSON.parse(fs.readFileSync(userSession, 'utf8'));
+
+  // Check if the parsed user is an empty array or object
+  if (!user || (Array.isArray(user) && user.length === 0) || (typeof user === 'object' && Object.keys(user).length === 0)) {
+    return null;
+  }
+
+  return user;
+}
+
+export const logout = () => {
+  fs.writeFileSync(userSession, JSON.stringify([], null, 2));
+}
 
 export const findUserByUsername = (username) => {
   return loadUsers().find(user => user.username === username);
@@ -29,5 +50,5 @@ export const addUser = (username, password) => {
   const newUser = { userId, username, password };
   users.push(newUser);
   saveUsers(users);
-  return userId;
+  return newUser;
 };

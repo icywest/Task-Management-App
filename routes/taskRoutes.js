@@ -22,24 +22,43 @@ router.get('/tasks/:userId', (req, res) => {
 
 router.post('/tasks/:userId', (req, res) => {
   const { userId } = req.params;
-  const {title, description, category, priority, status, dueDate} = req.body;
-  addTask(title, description, userId, category, priority, dueDate, status);
+  const { title, description, category, priority, status, dueDate, completionDate } = req.body;
 
-  res.redirect(`/home/${userId}`);
+  const task = addTask(title, description, userId, category, priority, dueDate, status, completionDate);
+
+  if (task.error) {
+    res.render('taskForm', { message: task.error, userId });
+  } else {
+    res.redirect(`/home/${userId}`);
+  }
 });
+
+
 
 router.put('/tasks/:userId/:taskId', (req, res) => {
   const { userId, taskId } = req.params; 
-  const { title, description, category, priority, status, dueDate } = req.body;  
+  const { title, description, category, priority, status, dueDate, completionDate } = req.body;
 
-  const updatedFields = {
-    title,
-    description,
-    category,
-    priority,
-    status,
-    dueDate: dueDate || null  
-  };
+  let updatedFields = {};
+
+  if (status) {
+    updatedFields.status = status;
+    if (status === 'Completed') {
+      // Mark completion date as current date when clicking on the complete button
+      updatedFields.completionDate = new Date().toISOString().split("T")[0];
+    }
+  }
+
+  if (title) updatedFields.title = title;
+  if (description) updatedFields.description = description;
+  if (category) updatedFields.category = category;
+  if (priority) updatedFields.priority = priority;
+  if (dueDate) updatedFields.dueDate = dueDate;
+
+  // Ensure that completionDate can be set if provided in the request body.
+  if (completionDate) {
+    updatedFields.completionDate = completionDate;
+  }
 
   const updatedTask = updateTask(taskId, updatedFields);
 
@@ -49,6 +68,7 @@ router.put('/tasks/:userId/:taskId', (req, res) => {
     res.status(404).send('Task not found');
   }
 });
+
 
 router.delete('/tasks/:userId/:taskId', (req, res) => {
   const { userId, taskId } = req.params;

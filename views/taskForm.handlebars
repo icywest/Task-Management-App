@@ -1,43 +1,45 @@
 <h1>{{#if task}}Edit Task{{else}}Add Task{{/if}}</h1>
 <form action="{{#if task}}/tasks/tasks/{{userId}}/{{task.taskId}}{{else}}/tasks/tasks/{{userId}}{{/if}}" method="POST">
-
-
   {{#if task}}
-        <input type="hidden" name="_method" value="PUT">
-    {{/if}}
+    <input type="hidden" name="_method" value="PUT">
+  {{/if}}
 
   <label for="title">Task Title:</label>
   <input type="text" name="title" id="title" value="{{#if task}}{{task.title}}{{/if}}" required>
 
   <label for="description">Description:</label>
-  <textarea name="description" id="description"required>{{task.description}}</textarea>
+  <textarea name="description" id="description" required>{{task.description}}</textarea>
 
-<label for="category">Category:</label>
-<select name="category" id="category" required>
-  <option value="Work" {{#if task}}{{#if (eq task.category "Work")}}selected{{/if}}{{/if}}>Work</option>
-  <option value="Personal" {{#if task}}{{#if (eq task.category "Personal")}}selected{{/if}}{{/if}}>Personal</option>
-  <option value="School" {{#if task}}{{#if (eq task.category "School")}}selected{{/if}}{{/if}}>School</option>
-  <option value="Other" {{#if task}}{{#if (eq task.category "Other")}}selected{{/if}}{{/if}}>Other</option>
-</select>
+  <label for="category">Category:</label>
+  <select name="category" id="category" required>
+    <option value="Work" {{#if task}}{{#if (eq task.category "Work")}}selected{{/if}}{{/if}}>Work</option>
+    <option value="Personal" {{#if task}}{{#if (eq task.category "Personal")}}selected{{/if}}{{/if}}>Personal</option>
+    <option value="School" {{#if task}}{{#if (eq task.category "School")}}selected{{/if}}{{/if}}>School</option>
+    <option value="Other" {{#if task}}{{#if (eq task.category "Other")}}selected{{/if}}{{/if}}>Other</option>
+  </select>
 
+  <label for="priority">Task Priority:</label>
+  <select name="priority" id="priority" required>
+    <option value="High" {{#if task}}{{#if (eq task.priority "High")}}selected{{/if}}{{/if}}>High</option>
+    <option value="Medium" {{#if task}}{{#if (eq task.priority "Medium")}}selected{{/if}}{{/if}}>Medium</option>
+    <option value="Low" {{#if task}}{{#if (eq task.priority "Low")}}selected{{/if}}{{/if}}>Low</option>
+  </select>
 
-<label for="priority">Task Priority</label>
-<select name="priority" id="priority" required>
-  <option value="High" {{#if task}}{{#if (eq task.priority "High")}}selected{{/if}}{{/if}}>High</option>
-  <option value="Medium" {{#if task}}{{#if (eq task.priority "Medium")}}selected{{/if}}{{/if}}>Medium</option>
-  <option value="Low" {{#if task}}{{#if (eq task.priority "Low")}}selected{{/if}}{{/if}}>Low</option>
-</select>
-
-<label for="status">Task Status:</label>
-<select name="status" id="status" required>
-  <option value="Pending" {{#if task}}{{#if (eq task.status "Pending")}}selected{{/if}}{{/if}}>Pending</option>
-  <option value="Canceled" {{#if task}}{{#if (eq task.status "Canceled")}}selected{{/if}}{{/if}}>Canceled</option>
-  <option value="Completed" {{#if task}}{{#if (eq task.status "Completed")}}selected{{/if}}{{/if}}>Completed</option>
-</select>
-
+  <label for="status">Task Status:</label>
+  <select name="status" id="status" required onchange="toggleCompletionDateField()">
+    <option value="Pending" {{#if task}}{{#if (eq task.status "Pending")}}selected{{/if}}{{/if}}>Pending</option>
+    <option value="Cancelled" {{#if task}}{{#if (eq task.status "Cancelled")}}selected{{/if}}{{/if}}>Cancelled</option>
+    <option value="Completed" {{#if task}}{{#if (eq task.status "Completed")}}selected{{/if}}{{/if}}>Completed</option>
+  </select>
 
   <label for="dueDate">Due Date:</label>
   <input type="date" name="dueDate" id="dueDate" value="{{#if task}}{{task.dueDate}}{{/if}}" required>
+
+  <!-- New Completion Date Field -->
+  <div id="completionDateField" style="display: none;">
+    <label for="completionDate">Completion Date:</label>
+    <input type="date" name="completionDate" id="completionDate" value="{{#if task}}{{task.completionDate}}{{/if}}">
+  </div>
 
   <button type="submit">Save Task</button>
 </form>
@@ -45,3 +47,5 @@
 {{#if message}}
   <p style="color: red;">{{message}}</p>
 {{/if}}
+
+<script src="/js/dateValidator.js"></script>

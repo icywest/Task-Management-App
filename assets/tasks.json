@@ -7,7 +7,8 @@
     "category": "School",
     "priority": "High",
     "status": "Completed",
-    "dueDate": "2025-02-09"
+    "dueDate": "2025-02-09",
+    "completionDate": "2025-02-13T05:28:44.195Z"
   },
   {
     "taskId": 2,
@@ -21,23 +22,25 @@
   },
   {
     "taskId": 3,
-    "title": "Week 2 Discussion",
-    "description": "ghghggh",
     "userId": 5,
+    "status": "Completed",
+    "dueDate": "2025-02-07",
+    "completionDate": "2025-02-13",
+    "title": " cdd",
+    "description": "ddd",
     "category": "Work",
-    "priority": "High",
-    "status": "Pending",
-    "dueDate": "2025-02-08"
+    "priority": "High"
   },
   {
     "taskId": 4,
-    "title": "Week 1 Discussion",
-    "description": "week 1 discussion",
     "userId": 5,
-    "category": "School",
-    "priority": "Medium",
-    "status": "Canceled",
-    "dueDate": "2025-02-04"
+    "status": "Completed",
+    "dueDate": "2025-02-12",
+    "completionDate": "2025-02-13T05:19:26.893Z",
+    "title": "Week 2 Discussion",
+    "description": "vffbfgdg",
+    "category": "Work",
+    "priority": "High"
   },
   {
     "taskId": 5,
@@ -51,12 +54,13 @@
   },
   {
     "taskId": 6,
-    "title": "W2 Discussion",
-    "description": "wIWIWIWI",
+    "title": "Test Task",
+    "description": "ssdsd",
     "userId": 5,
-    "category": "Other",
-    "priority": "Low",
-    "status": "Completed",
-    "dueDate": "2025-03-05"
+    "category": "Work",
+    "priority": "High",
+    "status": "Cancelled",
+    "dueDate": "2025-02-12",
+    "completionDate": "2025-02-13"
   }
 ]
