@@ -1,94 +1,298 @@
-/* General styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #E8F1F2;
+}
+
+.loginForm {
+  padding: 20px;
+}
+
+.loginForm input {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 60px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #578E7E;
+  font-size: 1em;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container form input[type="text"]:focus,
+.login-container form input[type="password"]:focus {
+  width: 100%;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container form button {
+  width: 100%;
+  padding: 12px;  
+  border: none;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.login-container form button:hover {
+  background-color: #3D3D3D;
+  transform: translateY(-2px);
+}
+
+.login-container p {
+  color: #3D3D3D;
+  font-size: 0.9em;
+  margin-top: 20px;
+}
+
+
+/* Global body styles */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #E5E1DA;
+  color: #3D3D3D;
+  line-height: 1.6;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* Links */
+a {
+  color: #578E7E;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #3D3D3D;
+}
+
+/* Main container */
+.container {
+  height: 100%;
+  margin: 20px auto;
+  background-color: #F1F0E8;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F5ECD5;
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.navbar label {
+  margin-right: 10px;
+  color: #3D3D3D;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.navbar select,
+.navbar input[type="text"] {
+  margin-right: 15px;
+  padding: 8px 12px;
+  border: 1px solid #578E7E;
+  border-radius: 30px;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar select:focus,
+.navbar input[type="text"]:focus {
+  outline: none;
+  border-color: #3D3D3D;
+  box-shadow: 0 0 5px rgba(61, 61, 61, 0.3);
+}
+
+/* Buttons in navbar */
+.navbar button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #578E7E;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.navbar button:hover {
+  background-color: #3D3D3D;
+}
+
+/* General button styles */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 60px;
+  margin: 10px 0;
+  background-color: #493628;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #3D3D3D;
+  transform: translateY(-2px);
+}
+
+/* Responsive Table */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  background-color: #F5ECD5;
+  color: #3D3D3D;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #FFFAEC;
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+table tr:hover {
+  background-color: #F5ECD5;
+}
+  
+
+.taskForm{
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+}
+
+
+/* Footer Styles */
+footer {
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+
+/* Responsive design */
+
+/* For tablets and slightly smaller screens */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+    margin: 10px auto;
+    padding: 15px;
+  }
+  
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+  }
+  
+  .navbar label,
+  .navbar select,
+  .navbar input[type="text"],
+  .navbar button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  
+  .loginForm {
+    width: 100%;
+    padding: 15px;
   }
   
   .container {
-    width: 80%;
-    margin: 0 auto;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Table styles */
-  table {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin: 10px 0;
   }
   
-  table, th, td {
-    border: 1px solid #ddd;
+  .loginForm input {
+    padding: 10px 15px;
+    font-size: 0.9em;
   }
   
-  th, td {
-    padding: 10px;
-    text-align: left;
+  .login-container form input[type="text"]:focus,
+  .login-container form input[type="password"]:focus {
+    padding: 15px;
   }
   
-  th {
-    background-color: #f4f4f4;
-  }
-  
-  /* Form styles */
-  form {
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"],
-  input[type="password"],
-  select {
-    width: 100%;
+  table th,
+  table td {
     padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    font-size: 0.9em;
+  }
+}
+
+/* For small mobile */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px;
+  }
+  
+  .navbar label {
+    font-size: 0.9em;
+  }
+  
+  .navbar select,
+  .navbar input[type="text"],
+  .navbar button {
+    font-size: 0.9em;
+    padding: 6px 10px;
   }
   
   button {
-    padding: 10px 15px;
-    background-color: #ffb6c1;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 8px 15px;
+    font-size: 0.9em;
   }
-  
-  button[type="submit"]:hover {
-    background-color: #db7093;
-  }
-  
-  /* Link styles */
-  a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Additional styles */
-  footer {
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  footer a {
-    margin: 0 10px;
-    color: #007bff;
-  }
-  
-  footer a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Error message styles */
-  p {
-    color: red;
-  }
-  
+}

@@ -3,6 +3,7 @@ import path from 'path';
 
 const tasksFilePath = path.join('assets', 'tasks.json');
 
+// Get all the tasks from the JSON file
 export const getAllTasks = () => {
   try {
     return JSON.parse(fs.readFileSync(tasksFilePath, 'utf8'));
@@ -11,6 +12,7 @@ export const getAllTasks = () => {
   }
 };
 
+// Add a new task to the JSON file
 export const addTask = (title, description, userId, category, priority, dueDate, status, completionDate = null) => {
   const tasks = getAllTasks();
 
@@ -36,17 +38,17 @@ export const addTask = (title, description, userId, category, priority, dueDate,
   return newTask;
 };
 
-
-
-
+// Get a task by its ID
 export const getTaskById = (taskId) => {
   return getAllTasks().find(task => task.taskId === parseInt(taskId));
 };
 
+// Get all tasks by a user ID
 export const getTasksByUserId = (userId) => {
   return getAllTasks().filter(task => task.userId === parseInt(userId));
 };
 
+// Update a task by its ID with new fields
 export const updateTask = (taskId, updatedFields) => {
   const tasks = getAllTasks();
   const index = tasks.findIndex(task => task.taskId === parseInt(taskId));
@@ -59,6 +61,7 @@ export const updateTask = (taskId, updatedFields) => {
   return null;
 };
 
+// Delete a task by its ID
 export const deleteTask = (taskId) => {
   let tasks = getAllTasks();
   tasks = tasks.filter(task => task.taskId !== parseInt(taskId));
@@ -79,6 +82,7 @@ export const sortTasks = (tasks, sortBy) => {
   });
 }
 
+// Filter tasks by status, due date, and search
 export const filterTasks = (userId, { status, dueDate, search }) => {
   let tasks = getTasksByUserId(userId);
   const today = new Date().toISOString().split("T")[0]; // Get today's date in the format "YYYY-MM-DD" 

@@ -1,15 +1,15 @@
 {{#if userId}}
-  <a href="/home/{{userId}}">Home</a> | 
+  <a href="/home/{{userId}}">Home</a>
   <a href="/logout">Logout</a>
 {{else}}
   <h1>Welcome to the Task Management Application</h1>
-  <form action="/user/login" method="POST">
+  <form action="/user/login" method="POST" class="loginForm">
     <input type="text" name="username" placeholder="Username" required />
     <input type="password" name="password" placeholder="Password" required />
-    <button type="submit" name="action" value="login">Login</button>
-    <button type="submit" name="action" value="create">Create Account</button>
+     <button type="submit" name="action" value="login">Login</button>
+    <button type="submit" name="action" value="create">Create Account</button>  
   </form>
   {{#if message}}
-    <p style="color: red;">{{message}}</p>
+    <p>{{message}}</p>
   {{/if}}
 {{/if}}

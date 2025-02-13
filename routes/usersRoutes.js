@@ -1,12 +1,15 @@
 import express from 'express';
-import { findUserByUsername, addUser, storeSessions,logout } from '../models/user.js';
+import { findUserByUsername, addUser, storeSessions,logout, checkSession } from '../models/user.js';
 
 const router = express.Router();
 
 router.post('/login', (req, res) => {
   const { username, password, action } = req.body;
+  const userSession = checkSession();
 
-  console.log(req.body);
+  if (userSession) {
+    return res.render('login', { message: 'There is a session running. Please log out first.', alertType: 'error' });
+  }
 
   if (action === 'login') {
     const user = findUserByUsername(username);
@@ -26,6 +29,10 @@ router.post('/login', (req, res) => {
   } else if (action === 'create') {
     if (findUserByUsername(username)) {
       return res.render('login', { message: 'User already exists!', alertType: 'error' });
+    }
+
+    if (userSession) {
+      return res.render('login', { message: 'There is a session running. Please log out first.', alertType: 'error' });
     }
 
     const user = addUser(username, password);

@@ -4,6 +4,7 @@ import { addTask, getAllTasks, updateTask, deleteTask, getTaskById, getTasksByUs
 
 const router = Router();
 
+//Get all tasks by user
 router.get('/tasks/:userId', (req, res) => {
   const { userId } = req.params;
   const { status, dueDate, search } = req.query; 
@@ -13,13 +14,13 @@ router.get('/tasks/:userId', (req, res) => {
   if (status || dueDate || search) {
     tasks = filterTasks(userId, { status, dueDate, search });
   } else {
-    tasks = getTasksByUserId(userId);
+    tasks = getTasksByUserId(userId).filter(task => task.status !== "Completed");
   }
 
   res.json(tasks);
 });
 
-
+//Add tasks by user
 router.post('/tasks/:userId', (req, res) => {
   const { userId } = req.params;
   const { title, description, category, priority, status, dueDate, completionDate } = req.body;
@@ -34,7 +35,7 @@ router.post('/tasks/:userId', (req, res) => {
 });
 
 
-
+// Update or edit a task by user
 router.put('/tasks/:userId/:taskId', (req, res) => {
   const { userId, taskId } = req.params; 
   const { title, description, category, priority, status, dueDate, completionDate } = req.body;
@@ -70,13 +71,12 @@ router.put('/tasks/:userId/:taskId', (req, res) => {
 });
 
 
+// Delete a task by user
 router.delete('/tasks/:userId/:taskId', (req, res) => {
   const { userId, taskId } = req.params;
 
   deleteTask(taskId);
   res.redirect(`/home/${userId}`);
 });
-
-
 
 export default router;

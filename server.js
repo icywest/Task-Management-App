@@ -49,7 +49,7 @@ const checkAuth = (req, res, next) => {
 
   req.user = user;
 
-  console.log(user);
+  //console.log(user);
 
   next();
 };
@@ -60,12 +60,16 @@ server.use(updateReqMethod);
 server.use('/user', userRoutes);
 server.use('/tasks', taskRoutes);
 
-
+// Home page according the user id
 server.get('/home/:userId', checkAuth,  async (req, res) => {
   const userId = parseFloat(req.params.userId); 
   const { sort, status, dueDate, search } = req.query;
 
   const user = req.user;
+
+  if(userId != user.userId) {
+    return res.redirect(`/home/${user.userId}`);
+  }
 
   try {
     const queryParams = new URLSearchParams();
@@ -88,6 +92,7 @@ server.get('/home/:userId', checkAuth,  async (req, res) => {
   }
 });
 
+// Add Task Route
 server.get('/add-task/:userId/:taskId?', (req, res) => {
   const userId = parseFloat(req.params.userId);
 

@@ -7,6 +7,7 @@
     <th>Priority</th>
     <th>Due Date</th>
     <th>Status</th>
+    <th>Update</th>
     <th>Actions</th>
   </tr>
   {{#each tasks}}
@@ -19,19 +20,21 @@
       <td>{{this.dueDate}}</td>
       <td>{{this.status}}</td>
       <td>
-            <a href='/add-task/{{userId}}/{{taskId}}'>Edit Task</a>
-    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
+      <a href='/add-task/{{userId}}/{{taskId}}'>Edit</a>
+      </td>
+      <td>
+    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" onsubmit="return confirmDelete();">
       <input type="hidden" name="_method" value="DELETE">
-      <button type="submit" style="color: red; cursor: pointer;">Delete Task</button>
+      <button type="submit">Delete</button>
     </form>
 
-    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" style="display:inline;" onsubmit="return confirmComplete();">
+    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" onsubmit="return confirmComplete();">
       <input type="hidden" name="_method" value="PUT">
       <input type="hidden" name="status" value="Completed">
       <button type="submit">Complete</button>
     </form>
 
-    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" style="display:inline;" onsubmit="return confirmCancel();">
+    <form action="/tasks/tasks/{{userId}}/{{taskId}}" method="POST" onsubmit="return confirmCancel();">
       <input type="hidden" name="_method" value="PUT">
       <input type="hidden" name="status" value="Cancelled">
       <button type="submit">Cancel</button>

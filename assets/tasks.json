@@ -1,66 +1,137 @@
 [
   {
-    "taskId": 5,
-    "title": "Web 2 task management",
-    "description": "Express Application",
-    "userId": 5,
-    "category": "School",
+    "taskId": 7,
+    "title": "Submit Project Proposal",
+    "description": "Finalize and submit the project proposal document.",
+    "userId": 3,
+    "category": "Work",
     "priority": "High",
-    "status": "Completed",
-    "dueDate": "2025-02-09",
-    "completionDate": "2025-02-13T05:28:44.195Z"
+    "status": "Pending",
+    "dueDate": "2025-03-15"
   },
   {
-    "taskId": 2,
-    "title": "Week 2 Discussion",
-    "description": "si",
-    "userId": 6,
+    "taskId": 8,
+    "title": "Grocery Shopping",
+    "description": "Buy vegetables, fruits, and dairy products.",
+    "userId": 2,
     "category": "Personal",
     "priority": "Medium",
     "status": "Pending",
-    "dueDate": "2025-02-03"
+    "dueDate": "2025-02-20"
   },
   {
-    "taskId": 3,
-    "userId": 5,
-    "status": "Completed",
-    "dueDate": "2025-02-07",
-    "completionDate": "2025-02-13",
-    "title": " cdd",
-    "description": "ddd",
-    "category": "Work",
-    "priority": "High"
-  },
-  {
-    "taskId": 4,
-    "userId": 5,
-    "status": "Completed",
-    "dueDate": "2025-02-12",
-    "completionDate": "2025-02-13T05:19:26.893Z",
-    "title": "Week 2 Discussion",
-    "description": "vffbfgdg",
-    "category": "Work",
-    "priority": "High"
-  },
-  {
-    "taskId": 5,
-    "title": "W1 Discussion",
-    "description": "w1 ",
-    "userId": 5,
-    "category": "School",
-    "priority": "Low",
-    "status": "Completed",
-    "dueDate": "2025-01-26"
-  },
-  {
-    "taskId": 6,
-    "title": "Test Task",
-    "description": "ssdsd",
-    "userId": 5,
+    "taskId": 9,
+    "title": "Team Meeting",
+    "description": "Weekly sync-up with the development team.",
+    "userId": 3,
     "category": "Work",
     "priority": "High",
+    "status": "Completed",
+    "dueDate": "2025-01-29",
+    "completionDate": "2025-01-29T14:30:00.000Z"
+  },
+  {
+    "taskId": 10,
+    "title": "Book Doctor Appointment",
+    "description": "Schedule an annual health check-up.",
+    "userId": 1,
+    "category": "Health",
+    "priority": "High",
+    "status": "Pending",
+    "dueDate": "2025-04-05"
+  },
+  {
+    "taskId": 11,
+    "title": "Complete JavaScript Assignment",
+    "description": "Finish the coding exercises for the JavaScript course.",
+    "userId": 2,
+    "category": "Education",
+    "priority": "High",
+    "status": "Completed",
+    "dueDate": "2025-02-10",
+    "completionDate": "2025-02-10T23:59:59.000Z"
+  },
+  {
+    "taskId": 12,
+    "title": "Car Maintenance",
+    "description": "Oil change and general check-up.",
+    "userId": 1,
+    "category": "Personal",
+    "priority": "Medium",
     "status": "Cancelled",
-    "dueDate": "2025-02-12",
+    "dueDate": "2025-03-01",
+    "completionDate": "2025-02-28"
+  },
+  {
+    "taskId": 13,
+    "title": "Prepare for Hackathon",
+    "description": "Gather resources and review competition guidelines.",
+    "userId": 3,
+    "category": "Work",
+    "priority": "High",
+    "status": "Pending",
+    "dueDate": "2025-03-24"
+  },
+  {
+    "taskId": 14,
+    "title": "Pay Internet Bill",
+    "description": "Make the monthly payment for the home internet.",
+    "userId": 2,
+    "category": "Personal",
+    "priority": "High",
+    "status": "Pending",
+    "dueDate": "2025-02-25"
+  },
+  {
+    "taskId": 15,
+    "title": "Update Resume",
+    "description": "Make necessary updates to reflect recent experience.",
+    "userId": 1,
+    "category": "Work",
+    "priority": "Medium",
+    "status": "Pending",
+    "dueDate": "2025-03-10"
+  },
+  {
+    "taskId": 16,
+    "title": "Plan Weekend Trip",
+    "description": "Organize the itinerary and bookings for the weekend getaway.",
+    "userId": 2,
+    "category": "Personal",
+    "priority": "Low",
+    "status": "Pending",
+    "dueDate": "2025-03-20"
+  },
+  {
+    "taskId": 17,
+    "title": "Code Review",
+    "description": "Review code submissions from the development team.",
+    "userId": 3,
+    "category": "Work",
+    "priority": "High",
+    "status": "Pending",
+    "dueDate": "2025-02-28"
+  },
+  {
+    "taskId": 18,
+    "title": "Buy a Gift",
+    "description": "Purchase a birthday gift for a friend.",
+    "userId": 1,
+    "category": "Personal",
+    "priority": "Medium",
+    "status": "Completed",
+    "dueDate": "2025-02-22",
     "completionDate": "2025-02-13"
+  },
+  {
+    "taskId": 19,
+    "title": "Attend Cybersecurity Workshop",
+    "description": "Participate in an online session on cybersecurity trends.",
+    "userId": 2,
+    "category": "Education",
+    "priority": "High",
+    "status": "Completed",
+    "dueDate": "2025-01-18",
+    "completionDate": "2025-01-18T16:00:00.000Z"
   }
 ]

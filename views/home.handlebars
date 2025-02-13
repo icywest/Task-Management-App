@@ -1,6 +1,6 @@
 <h1>Welcome, {{user.username}}!</h1>
-
-<form method="GET">
+<a href='/add-task/{{userId}}'>Add New Task</a>
+<form class="navbar" method="GET" action="/home/{{userId}}">
   <label>Sort by:</label>
   <select name="sort">
     <option value="">All</option>
@@ -23,18 +23,18 @@
     <option value="lateCompletion">Late Completion</option>
   </select>
 
-  <label>Search (Title or Description):</label>
+  <label>Search:</label>
   <input type="text" name="search" value="{{search}}">
-
-  <button type="submit">Apply</button>
+  <span> 
+    <button type="submit">Apply</button>
   <button type="button" onclick="window.location='/home/{{userId}}'">Reset Filters</button>
+  </span>
 </form>
 
 {{> tasksTable}}
 
 <footer>
-  <a href='/add-task/{{userId}}'>Add New Task</a>
-  <form action="/user/logout" method="POST">
+    <form action="/user/logout" method="POST">
     <button type="submit">Logout</button>
   </form>
 </footer>
